@@ -11,9 +11,23 @@
 <body>
   <div class="shine" aria-hidden="true"></div>
 
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="wrap topbar-inner">
+  <!-- TOP DEAL BAR (desconto termina em + pessoas vendo agora) -->
+  <div class="dealbar" role="status" aria-live="polite">
+    <div class="wrap dealbar-inner">
+      <div class="deal-left">
+        <span class="deal-badge">🔥 Oferta ativa</span>
+        <span class="deal-text">Termina em <b id="dealTimer">--:--:--</b></span>
+      </div>
+      <div class="deal-right">
+        <span class="deal-pill">👀 <b id="viewersNow">--</b> pessoas vendo agora</span>
+        <a class="btn glow small" href="#comprar">Comprar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY NAV (âncoras) -->
+  <nav class="nav">
+    <div class="wrap nav-inner">
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
         <div class="brand-text">
@@ -22,227 +36,10 @@
         </div>
       </div>
 
-      <div class="top-actions">
-        <span class="pill">Conteúdo educativo</span>
-        <a class="btn glow" href="#comprar">Comprar</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- HERO -->
-  <header class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="badge">
-          <span class="dot"></span>
-          Alternativas naturais tradicionais • uso responsável
-        </div>
-
-        <h1 id="produtoNome">
-          Manual Completo de Remédios Naturais para Auxílio no Bem-Estar Diário
-        </h1>
-
-        <p class="lead">
-          Um guia organizado por desconfortos comuns, com orientações de preparo, modo de uso e observações de segurança —
-          para você consultar rápido quando precisar.
-        </p>
-
-        <div class="cta-row">
-          <a class="btn glow big" id="btnHero" href="#comprar">Quero acesso imediato</a>
-          <a class="btn ghost big" href="#conteudo">Ver conteúdo</a>
-        </div>
-
-        <div class="trust">
-          <div class="t">
-            <span class="icon">✓</span>
-            <div>
-              <b>Acesso instantâneo</b>
-              <div class="t-sub">PDF liberado após pagamento</div>
-            </div>
-          </div>
-
-          <div class="t">
-            <span class="icon">🛡</span>
-            <div>
-              <b>Compra segura</b>
-              <div class="t-sub">Checkout protegido</div>
-            </div>
-          </div>
-
-          <div class="t">
-            <span class="icon">↩</span>
-            <div>
-              <b>Garantia 7 dias</b>
-              <div class="t-sub">Risco zero</div>
-            </div>
-          </div>
-        </div>
+      <div class="nav-links" aria-label="Navegação">
+        <a href="#conteudo">Conteúdo</a>
+        <a href="#garantia">Garantia</a>
+        <a href="#faq">FAQ</a>
       </div>
 
-      <div>
-        <!-- ONE MAIN IMAGE -->
-        <div class="hero-image reveal">
-          <img id="heroImg" alt="Remédios naturais e ingredientes" src="" />
-          <div class="stamp">
-            <div class="tag">🌿 Bem-estar diário<small>organizado por tema</small></div>
-            <div class="tag">⚡ Consulta rápida<small>ideal no celular</small></div>
-          </div>
-        </div>
-
-        <!-- OFFER BOX -->
-        <div class="card reveal" id="comprar">
-          <div class="timer">
-            ⏳ Promoção expira em <b id="timer">--:--:--</b>
-            <span class="pill pill-warn">vagas promocionais</span>
-          </div>
-
-          <div class="offer-head">
-            <div>
-              <div class="strike" id="precoDe">De R$ 57,00</div>
-              <div class="price" id="precoPor">R$ 27,00</div>
-              <div class="mini">PDF • acesso imediato após confirmação</div>
-            </div>
-
-            <div class="pill pill-box">
-              ✅ Entrega automática<br/>✅ Leitura no celular
-            </div>
-          </div>
-
-          <div class="offer-cta">
-            <a class="btn glow big full" id="btnCheckout" href="#" target="_blank" rel="noopener">Comprar agora</a>
-            <div class="mini" id="bonusLine">🔥 Bônus: tabela rápida + checklist de segurança</div>
-          </div>
-
-          <div class="disclaimer">
-            ⚠️ Conteúdo educativo e informativo. Não substitui orientação médica.
-            Em sintomas persistentes, febre alta, dores intensas, gestação/lactação ou uso de medicação contínua, procure um profissional de saúde.
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- CONTENT -->
-  <main class="wrap">
-    <section id="conteudo" class="reveal">
-      <h2>O que tem dentro</h2>
-      <p class="sub">Organizado por tema para você encontrar rápido o que precisa.</p>
-
-      <div class="list">
-        <div class="chip"><span class="check"></span><div><b>Digestivo</b><small>prisão de ventre, azia, dor abdominal, retenção de líquido</small></div></div>
-        <div class="chip"><span class="check"></span><div><b>Respiratório</b><small>resfriado, dor de garganta, febre (orientações de auxílio)</small></div></div>
-        <div class="chip"><span class="check"></span><div><b>Dores comuns</b><small>dor de cabeça, dor de dente, dor no ouvido</small></div></div>
-        <div class="chip"><span class="check"></span><div><b>Músculos & articulações</b><small>costas, pescoço, ombros, joelhos, pernas, ciática</small></div></div>
-        <div class="chip"><span class="check"></span><div><b>Saúde feminina</b><small>cólica menstrual, TPM</small></div></div>
-        <div class="chip"><span class="check"></span><div><b>Pele & bem-estar</b><small>furúnculo (cuidados), rosto oleoso, olheiras, alergias</small></div></div>
-      </div>
-    </section>
-
-    <section class="reveal">
-      <h2>Por que esse manual converte mais</h2>
-      <p class="sub">Formato simples + consulta rápida + foco em segurança.</p>
-
-      <div class="grid">
-        <div class="feat">
-          <b>✅ Direto ao ponto</b>
-          <p>Você abre e encontra por tema, com orientação prática e linguagem simples.</p>
-        </div>
-        <div class="feat">
-          <b>🍵 Preparo e modo de uso</b>
-          <p>Passo a passo claro para preparo, formas de consumo e cuidados gerais.</p>
-        </div>
-        <div class="feat">
-          <b>⚠️ Observações importantes</b>
-          <p>Alertas de segurança (quando evitar, quando procurar profissional) para uso responsável.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="two reveal">
-      <div class="card soft">
-        <h2>Para quem é</h2>
-        <div class="list onecol">
-          <div class="chip"><span class="check"></span><div><b>Quem busca bem-estar diário</b><small>com alternativas complementares e naturais</small></div></div>
-          <div class="chip"><span class="check"></span><div><b>Quem quer autonomia</b><small>um guia no celular para consulta rápida</small></div></div>
-          <div class="chip"><span class="check"></span><div><b>Quem valoriza hábitos naturais</b><small>sem promessas milagrosas</small></div></div>
-        </div>
-      </div>
-
-      <div class="card soft">
-        <h2>Garantia de 7 dias</h2>
-        <p class="sub">Se não fizer sentido, você pode solicitar reembolso dentro do prazo.</p>
-        <div class="mt12">
-          <a class="btn glow big full" href="#comprar">Quero comprar com garantia</a>
-        </div>
-        <p class="mini">Entrega digital (PDF) • acesso imediato após confirmação.</p>
-      </div>
-    </section>
-
-    <section class="faq reveal">
-      <h2>Dúvidas frequentes</h2>
-      <p class="sub">Transparência total antes da compra.</p>
-
-      <details>
-        <summary>Isso substitui médico ou tratamento?</summary>
-        <p>Não. O material é educativo e não substitui acompanhamento profissional. Em sintomas persistentes, procure orientação médica.</p>
-      </details>
-
-      <details>
-        <summary>Como vou receber o material?</summary>
-        <p>Você recebe o PDF pela plataforma de pagamento após a confirmação do pagamento (acesso imediato).</p>
-      </details>
-
-      <details>
-        <summary>Tem contraindicações?</summary>
-        <p>Sim. Gestantes, lactantes, crianças e pessoas com condições preexistentes ou uso de medicação contínua devem buscar orientação profissional.</p>
-      </details>
-    </section>
-
-    <section class="reveal">
-      <div class="card final-cta">
-        <div>
-          <h2 class="m0">Última chance de pegar a oferta</h2>
-          <p class="sub mTop6">O contador está rodando para você agora.</p>
-        </div>
-        <a class="btn glow big" href="#comprar">Comprar agora</a>
-      </div>
-    </section>
-
-    <footer>
-      <div class="footer-inner">
-        <span>© <span id="year"></span> Manual Natural • Conteúdo educativo</span>
-        <span class="pill">Sem promessas médicas</span>
-      </div>
-    </footer>
-  </main>
-
-  <!-- Sticky Buy Bar -->
-  <div class="stickybar" id="stickyBar">
-    <div class="left">
-      <b id="stickyPrice">R$ 27,00</b>
-      <span>PDF • acesso imediato</span>
-    </div>
-
-    <div class="mid">
-      <span class="countpill">⏳ expira em <b id="timer2">--:--:--</b></span>
-      <span class="pill pill-ok">Garantia 7 dias</span>
-    </div>
-
-    <div class="right">
-      <a class="btn glow big" id="btnSticky" href="#comprar">Comprar agora</a>
-    </div>
-  </div>
-
-  <!-- Social proof toast -->
-  <div class="toast" id="toast" aria-live="polite">
-    <div class="avatar" id="toastAvatar">L</div>
-    <div class="toast-text">
-      <b id="toastTitle">Laura acabou de comprar</b>
-      <small id="toastSub">Acesso liberado (PDF)</small>
-    </div>
-    <div class="ok">✅</div>
-  </div>
-
-  <script src="app.js" defer></script>
-</body>
-</html>
+      <div cl
