@@ -9,22 +9,22 @@ const CONFIG = {
   precoPor: "R$ 27,00",
   bonusLine: "🔥 Bônus: tabela rápida + checklist de segurança",
 
-  // 1 imagem principal (credibilidade). Se você tiver a sua, use: "assets/img/hero.jpg"
-  heroImageUrl: "https://images.unsplash.com/photo-1515825838458-f2fffe3f6cd8?q=80&w=1600&auto=format&fit=crop",
+  // FOTO DO EBOOK (uma única imagem que passe credibilidade)
+  // Se você tiver sua imagem, recomendo: "assets/img/ebook.jpg"
+  ebookImageUrl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1600&auto=format&fit=crop",
 
   // Contador agressivo por visitante
   offerMinutes: 15,
 
-  // Prova social (nomes)
-  buyers: [
-    "Laura","Camila","Fernanda","Juliana","Mariana","Patrícia","Renata","Bruna",
-    "Karina","Aline","Vanessa","Gabriela","Rafaela","Letícia","Cláudia","Priscila"
-  ],
+  // Pessoas vendo agora (range)
+  viewersMin: 18,
+  viewersMax: 67,
+  viewersUpdateEveryMs: 9000, // atualiza a cada 9s (leve e realista)
 
-  // Intervalos do toast (ms)
-  toastStartDelay: 4500,
-  toastIntervalMin: 9000,
-  toastIntervalMax: 18000
+  // Prova social (mensagem de venda) a cada 5 minutos
+  buyers: ["Laura","Camila","Fernanda","Juliana","Mariana","Patrícia","Renata","Bruna","Karina","Aline","Vanessa","Gabriela"],
+  toastEveryMs: 5 * 60 * 1000, // 5 minutos
+  toastStartDelayMs: 20 * 1000 // primeira mensagem após 20s
 };
 
 // =========================
@@ -47,8 +47,8 @@ function applyConfig(){
 
   $("#btnCheckout").href = CONFIG.checkoutUrl;
 
-  const heroImg = $("#heroImg");
-  heroImg.src = CONFIG.heroImageUrl;
+  const ebookImg = $("#ebookImg");
+  ebookImg.src = CONFIG.ebookImageUrl;
 
   $("#bonusLine").textContent = CONFIG.bonusLine;
   $("#year").textContent = new Date().getFullYear();
@@ -56,12 +56,14 @@ function applyConfig(){
 
 // =========================
 // Countdown (per visitor)
+// - atualiza 3 lugares: timer, timer2 e dealTimer
 // =========================
 function initCountdown(){
-  const timer1 = $("#timer");
-  const timer2 = $("#timer2");
-  const endKey = "offer_end_ts_v2";
+  const t1 = $("#timer");
+  const t2 = $("#timer2");
+  const t3 = $("#dealTimer");
 
+  const endKey = "offer_end_ts_v3";
   let endTs = Number(localStorage.getItem(endKey));
   if (!endTs || endTs < Date.now()) {
     endTs = Date.now() + CONFIG.offerMinutes * 60 * 1000;
@@ -72,10 +74,11 @@ function initCountdown(){
     const diff = Math.max(0, endTs - Date.now());
     const m = Math.floor(diff / 60000);
     const s = Math.floor((diff % 60000) / 1000);
-
     const text = `00:${pad(m)}:${pad(s)}`;
-    timer1.textContent = text;
-    timer2.textContent = text;
+
+    t1.textContent = text;
+    t2.textContent = text;
+    t3.textContent = text;
 
     if (diff === 0) {
       ["#btnCheckout", "#btnHero", "#btnSticky"].forEach(id => {
@@ -104,7 +107,40 @@ function initReveal(){
 }
 
 // =========================
-// Social proof toast
+// Viewers now (2 lugares)
+// =========================
+function initViewers(){
+  const v1 = $("#viewersNow");
+  const v2 = $("#viewersNow2");
+
+  // seed por visitante (mantém estável e realista)
+  const seedKey = "viewers_seed_v1";
+  let base = Number(localStorage.getItem(seedKey));
+  if (!base || base < CONFIG.viewersMin || base > CONFIG.viewersMax) {
+    base = randInt(CONFIG.viewersMin, CONFIG.viewersMax);
+    localStorage.setItem(seedKey, String(base));
+  }
+
+  function render(n){
+    v1.textContent = String(n);
+    v2.textContent = String(n);
+  }
+
+  render(base);
+
+  // varia levemente com o tempo (±0..3)
+  setInterval(() => {
+    const delta = randInt(-2, 3);
+    let next = base + delta;
+    next = Math.max(CONFIG.viewersMin, Math.min(CONFIG.viewersMax, next));
+    base = next;
+    localStorage.setItem(seedKey, String(base));
+    render(base);
+  }, CONFIG.viewersUpdateEveryMs);
+}
+
+// =========================
+// Social proof toast (a cada 5 minutos)
 // =========================
 function initToast(){
   const toast = $("#toast");
@@ -124,8 +160,8 @@ function initToast(){
     showToast();
     setInterval(() => {
       if (document.visibilityState === "visible") showToast();
-    }, randInt(CONFIG.toastIntervalMin, CONFIG.toastIntervalMax));
-  }, CONFIG.toastStartDelay);
+    }, CONFIG.toastEveryMs);
+  }, CONFIG.toastStartDelayMs);
 }
 
 // =========================
@@ -148,6 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
   applyConfig();
   initCountdown();
   initReveal();
+  initViewers();
   initToast();
   initShine();
 });
